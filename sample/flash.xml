@@ -1,0 +1,50 @@
+<Module>
+    <ModulePrefs title="" author="shinya.takimoto">
+        <Require feature="opensocial-0.8" />
+        <Require feature="flash"/>
+    </ModulePrefs>
+    <Content type="html">
+    <![CDATA[
+    <div id="externalContainer">
+        <p>Alternative content</p>
+    </div>
+    <script type="text/javascript">
+        function swf(str){
+            if (navigator.appName.indexOf("Microsoft") != -1) {
+                return window[str];
+            }else {
+                return document[str];
+            }
+        }
+
+        function alertMessage(str){
+            alert(str);
+        }
+
+        function getProfile(id, requestid){
+            var req = opensocial.newDataRequest();
+            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), "viewer");
+            req.send(function(data) {
+                var viewer = data.get("viewer").getData();
+                var name = viewer.getDisplayName();
+                var user = {nickname: name};
+                swf("externalswf").replyCall(user, requestid);
+            });
+        }
+
+        function init() {
+            gadgets.flash.embedFlash("hoge.swf", "externalContainer", "9.0.0",
+            {
+                id : "externalswf",
+                width : 400,
+                height : 400,
+                quality : 'high',
+                wmode : 'transparent',
+                allowScriptAccess : 'always'
+            });
+        }
+
+        gadgets.util.registerOnLoadHandler(init);
+    </script>
+    ]]>
+</Content>
