@@ -47,4 +47,5 @@
         gadgets.util.registerOnLoadHandler(init);
     </script>
     ]]>
-</Content>
+    </Content>
+</Module>
