@@ -37,7 +37,7 @@ package net.takimo.delegates
             _id = id;
         }
 
-        public function JSCall(method:String, params:*):void
+        public function JSCall(method:String, params:* = undefined):void
         {
             _method = method;
             _params = params;

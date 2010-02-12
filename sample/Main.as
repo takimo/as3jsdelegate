@@ -13,9 +13,13 @@ package
         public function Main():void
         {
             var delegate:JSDelegate = new JSDelegate();
-            var profileCall:JSCall = new JSCall("getProfile", "348777");
+            var profileCall:JSCall = new JSCall("getProfile");
             profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
+
+            profileCall.params = "348777";
             delegate.execute(profileCall);
+
+            profileCall.params = "332493";
             delegate.execute(profileCall);
         }
 
