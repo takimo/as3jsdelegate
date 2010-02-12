@@ -1,8 +1,7 @@
 package net.takimo.delegates
 {
-    //[note]後で消す
+    //[note]delete externalInterface
     import flash.external.ExternalInterface;
-
     import flash.events.EventDispatcher;
     import net.takimo.events.JSCallEvent;
 
@@ -38,11 +37,10 @@ package net.takimo.delegates
             _id = id;
         }
 
-        public function JSCall(method:String, params:*, id:*):void
+        public function JSCall(method:String, params:*):void
         {
             _method = method;
             _params = params;
-            _id = id;
         }
 
         public function fire(result:*):void
@@ -50,7 +48,6 @@ package net.takimo.delegates
             var event:JSCallEvent = new JSCallEvent(JSCallEvent.RECIVE);
             event.result = result;
             dispatchEvent(event);
-            ExternalInterface.call("alertMessage", "fire!!");
         }
     }
 }

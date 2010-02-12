@@ -20,7 +20,7 @@ MIT-License
 public Main():void
 {
     var delegate:JSDelegate = new JSDelegate();
-    var profileCall:JSCall = new JSCall("getProfile", "348777", 1);
+    var profileCall:JSCall = new JSCall("getProfile", "348777");
     profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
     delegate.execute(profileCall);
 }

@@ -1,27 +1,29 @@
 package net.takimo.delegates
 {
     import flash.external.ExternalInterface;
-    import net.takimo.delegates.JSCall;
     import flash.system.Security;
+    import net.takimo.delegates.JSCall;
 
     public class JSDelegate
     {
-        private var _calls:Object;
+        private var _calls:Object = {};
+        private var _callCount:Number = 0;
+
+        private static const JS_GETHOSTNAME:String = "function() { return location.hostname }";
+        private static const BRIDGE_NAME:String = "replyCall";
+        private static const VERSION:String = "version 0.0.0.1";
 
         public function JSDelegate():void
         {
-            trace("version 0.0.0.1");
+            trace(VERSION);
 
-            _calls = {};
-            Security.allowDomain(ExternalInterface.call("function() { return location.hostname }"));
-
-            ExternalInterface.addCallback('replyCall', reciveReply);
+            Security.allowDomain(ExternalInterface.call(JS_GETHOSTNAME));
+            ExternalInterface.addCallback(BRIDGE_NAME, reciveReply);
         }
 
         public function execute(call:JSCall):void
         {
-            if(_calls[call.id])
-                trace("same request id used");
+            call.id = ++_callCount;
 
             _calls[call.id.toString()] = call;
             ExternalInterface.call(call.method, call.params, call.id);
@@ -29,8 +31,9 @@ package net.takimo.delegates
 
         public function reciveReply(result:*, id:*):void
         {
-            var call:JSCall = _calls[id];
+            var call:JSCall = _calls[id.toString()];
             call.fire(result);
         }
+
     }
 }

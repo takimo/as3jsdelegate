@@ -1,6 +1,6 @@
-package net.takimo
+package
 {
-    //[note]後で消す
+    //[note]delete
     import flash.external.ExternalInterface;
 
     import flash.display.Sprite;
@@ -13,14 +13,15 @@ package net.takimo
         public function Main():void
         {
             var delegate:JSDelegate = new JSDelegate();
-            var profileCall:JSCall = new JSCall("getProfile", "348777", 1);
+            var profileCall:JSCall = new JSCall("getProfile", "348777");
             profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
+            delegate.execute(profileCall);
             delegate.execute(profileCall);
         }
 
         private function profile_reciveHandler(e:JSCallEvent):void
         {
-            ExternalInterface.call("alertMessage", e.result.nickname);
+            ExternalInterface.call("alertMessage", "nickname: " + e.result.nickname);
         }
     }
 
