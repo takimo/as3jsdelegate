@@ -16,10 +16,10 @@ package
             var profileCall:JSCall = new JSCall("getProfile");
             profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
 
-            profileCall.params = "348777";
+            profileCall.params = "xxxxxx";
             delegate.execute(profileCall);
 
-            profileCall.params = "332493";
+            profileCall.params = "yyyyyy";
             delegate.execute(profileCall);
         }
 

@@ -23,7 +23,7 @@ var private _profileCall:JSCall;
 public Main():void
 {
     _delegate = new JSDelegate();
-    _profileCall = new JSCall("getProfile", "348777");
+    _profileCall = new JSCall("getProfile", "xxxxxx");
     _profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
     _delegate.execute(_profileCall);
 }
