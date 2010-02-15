@@ -17,12 +17,15 @@ MIT-License
 = Usage
 
 // ActionScript
+var private _delegate:JSDelegate;
+var private _profileCall:JSCall;
+
 public Main():void
 {
-    var delegate:JSDelegate = new JSDelegate();
-    var profileCall:JSCall = new JSCall("getProfile", "348777");
-    profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
-    delegate.execute(profileCall);
+    _delegate = new JSDelegate();
+    _profileCall = new JSCall("getProfile", "348777");
+    _profileCall.addEventListener(JSCallEvent.RECIVE, profile_reciveHandler);
+    _delegate.execute(_profileCall);
 }
 
 private function profile_reciveHandler(e:JSCallEvent):void
